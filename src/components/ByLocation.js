@@ -12,7 +12,7 @@ import {
 import Leaflet from "./Leaflet";
 
 
-export default function Map(props) {
+export default function ByLocation(props) {
   const {bounds, features, incidents_per_year} = props;
   const [state, setState] = React.useState({
     years: Object.keys(incidents_per_year).reduce((acc, year) => {

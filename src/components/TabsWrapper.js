@@ -5,7 +5,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import TabPanel from "./TabPanel";
-import Map from "./Map";
+import ByLocation from "./ByLocation";
 import ByYear from "./ByYear";
 
 export default (props) => {
@@ -29,7 +29,7 @@ export default (props) => {
         <ByYear incidents_per_year={incidents_per_year} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Map bounds={bounds} features={features} incidents_per_year={incidents_per_year} />
+        <ByLocation bounds={bounds} features={features} incidents_per_year={incidents_per_year} />
       </TabPanel>
     </>
   );

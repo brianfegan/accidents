@@ -29,7 +29,6 @@ class Chart extends React.Component{
     });
   }
   shouldComponentUpdate(nextProps, nextState){
-    console.log(nextProps);
     const {columns, pie_columns, type, years} = nextProps;
     const thisTypeIsPie = this.props.type === 'pie';
     const nextTypeIsPie = type === 'pie';
