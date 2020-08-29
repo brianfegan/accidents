@@ -1,13 +1,12 @@
 import {
   AppBar,
   Tabs,
-  Tab,
-  Typography
+  Tab
 } from "@material-ui/core";
 import React from "react";
 import TabPanel from "./TabPanel";
 import Map from "./Map";
-
+import ByYear from "./ByYear";
 
 export default (props) => {
   const [value, setValue] = React.useState(0);
@@ -16,25 +15,21 @@ export default (props) => {
     setValue(newValue);
   };
 
-  const {bounds, features, years} = props.data;
+  const {bounds, features, incidents_per_year} = props.data;
 
   return (
     <>
       <AppBar position="static">
         <Tabs component="div" value={value} onChange={handleChange} >
-          <Tab label="Incidents by Year - Bar" />
-          <Tab label="Incidents by Year - Line" />
-          <Tab label="Incidents by Location" />
+          <Tab label="Accidents by Year" />
+          <Tab label="Accidents by Location" />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Typography component="div">Incidents by Year - Bar</Typography>
+        <ByYear incidents_per_year={incidents_per_year} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Typography component="div">Incidents by Year - Line</Typography>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Map bounds={bounds} features={features} />
+        <Map bounds={bounds} features={features} incidents_per_year={incidents_per_year} />
       </TabPanel>
     </>
   );

@@ -12,12 +12,6 @@ function domReady(callback) {
 }
 
 function init() {
-  // reverse all the coords cause yeah
-  // annotatedData.features.forEach(feature => {
-  //   const coords = feature.geometry.coordinates[0];
-  //   coords.forEach(coord => coord.reverse());
-  // });
-
   const years = ['2010', '2011', '2012', '2013', '2014'];
 
   const data = {
@@ -32,7 +26,7 @@ function init() {
     }),
 
     // save a dataset of incidents per year
-    years: annotatedData.features.reduce((acc, curr) => {
+    incidents_per_year: annotatedData.features.reduce((acc, curr) => {
       const {properties} = curr;
       years.forEach(year => {
         if (properties[year] !== null) {
@@ -48,9 +42,6 @@ function init() {
       return acc.concat(coords);
     }, [])
   };
-  console.log(data.features);
-  console.log(data.years);
-  console.log(data.bounds);
 
   ReactDOM.render(<App data={data} />, document.querySelector('#app'));
 }

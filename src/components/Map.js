@@ -6,25 +6,21 @@ import {
   FormControl,
   FormGroup,
   FormControlLabel,
-  Grid
+  Grid,
+  Typography
 } from '@material-ui/core';
 import Leaflet from "./Leaflet";
 
 
 export default function Map(props) {
+  const {bounds, features, incidents_per_year} = props;
   const [state, setState] = React.useState({
-    years: {
-      2010: true,
-      2011: true,
-      2012: true,
-      2013: true,
-      2014: true
-    }
+    years: Object.keys(incidents_per_year).reduce((acc, year) => {
+      acc[year] = true;
+      return acc;
+    }, {})
   });
-  const {bounds, features} = props;
   const handleChange = (event) => {
-    // console.log(event.target.name);
-    // console.log(event.target.checked);
     const {years} = state;
     years[event.target.name] = event.target.checked;
     setState({years});
@@ -42,8 +38,6 @@ export default function Map(props) {
     }
     return false;
   });
-  console.log(filtered);
-  console.log(filteredYears);
 
   return (
     <Grid
@@ -55,7 +49,6 @@ export default function Map(props) {
     >
       <Grid component="div" item xs={2}>
         <FormControl component="fieldset">
-          {/*<FormLabel component="legend">{filtered.length} Locations</FormLabel>*/}
           <FormLabel component="legend">Filter By Year</FormLabel>
           <FormGroup>
             {Object.keys(years).map(year => <FormControlLabel
@@ -65,6 +58,7 @@ export default function Map(props) {
         </FormControl>
       </Grid>
       <Grid component="div" item xs={10}>
+        <Typography component="h2"><b>{filtered.length}</b> Geographic Features With Accidents</Typography>
         <Leaflet bounds={bounds} features={filtered} />
       </Grid>
     </Grid>
