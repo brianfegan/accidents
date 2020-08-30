@@ -12,7 +12,7 @@ import {
 import Leaflet from "./Leaflet";
 import {
   getBounds,
-  getFeatures,
+  getFilteredFeatures,
   getFilters
 } from "../redux/selectors";
 import { setLocationFilters } from "../redux/actions";
@@ -20,26 +20,9 @@ import { setLocationFilters } from "../redux/actions";
 
 export default function ByLocation() {
   const years = useSelector(getFilters);
-  const features = useSelector(getFeatures);
+  const filtered_features = useSelector(getFilteredFeatures);
   const dispatch = useDispatch();
-
-  const handleChange = event =>
-    dispatch(setLocationFilters({[event.target.name]: event.target.checked}));
-
-  // this could go in redux but would have to include something like immutableJS
-  // to get around equality checks and mutable structures not forcing renders
-  const filteredYears = Object.keys(years).filter(year => years[year]);
-  const filtered = features.filter(feature => {
-    const {accident_years} = feature.properties;
-    if (accident_years.length > 0) {
-      for (let i=0; i<accident_years.length; i++) {
-        const accident_year = accident_years[i];
-        if (filteredYears.indexOf(accident_year) !== -1) return true;
-      }
-    }
-    return false;
-  });
-
+  const handleChange = event => dispatch(setLocationFilters({[event.target.name]: event.target.checked}));
   return (
     <Grid
       component="div"
@@ -59,8 +42,9 @@ export default function ByLocation() {
         </FormControl>
       </Grid>
       <Grid component="div" item xs={10}>
-        <Typography component="h2"><b>{filtered.length}</b> Geographic Features With Accidents</Typography>
-        <Leaflet bounds={useSelector(getBounds)} features={filtered} />
+        <Typography component="div"><b>{filtered_features.length}</b> Geographic Features With Accidents</Typography>
+        <Typography component="div"><span style={{fontSize:'.9rem'}}>(Click on polygon for feature name)</span></Typography>
+        <Leaflet bounds={useSelector(getBounds)} features={filtered_features} />
       </Grid>
     </Grid>
   )

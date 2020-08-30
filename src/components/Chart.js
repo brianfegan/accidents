@@ -35,7 +35,7 @@ class Chart extends React.Component{
     if (!thisTypeIsPie && nextTypeIsPie) {
       this.chart.load({
         columns: pie_columns,
-        unload: ['Incidents'],
+        unload: ['Accidents'],
         done: () => {this.chart.transform(type)}
       });
     } else if (thisTypeIsPie && !nextTypeIsPie) {

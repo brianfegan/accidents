@@ -4,7 +4,7 @@ export const getBounds = state => state.bounds;
 
 export const getChartType = state => state.chart_type;
 
-export const getFeatures = state => state.features;
+export const getFilteredFeatures = state => state.filtered_features;
 
 export const getFilters = state => state.filters;
 

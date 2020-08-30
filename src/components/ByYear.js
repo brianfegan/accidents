@@ -22,12 +22,9 @@ export default function ByYear() {
   const chart_type = useSelector(getChartType);
   const years = useSelector(getYears);
   const dispatch = useDispatch();
-
-  const columns = ['Incidents'].concat(years.map(year => accidents_per_year[year]));
+  const columns = ['Accidents'].concat(years.map(year => accidents_per_year[year]));
   const pie_columns = Object.keys(accidents_per_year).map(year => [year, accidents_per_year[year]]);
-
   const handleChange = event => dispatch(setChartType(event.target.value));
-
   return (
     <Grid
       component="div"
@@ -47,7 +44,6 @@ export default function ByYear() {
         </FormControl>
       </Grid>
       <Grid component="div" item xs={10}>
-        <Typography component="h2">Accidents by Year</Typography>
         <Chart years={years} columns={columns} pie_columns={pie_columns} type={chart_type} />
       </Grid>
     </Grid>

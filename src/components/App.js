@@ -5,7 +5,7 @@ import {
 import React from "react";
 import TabsWrapper from "./TabsWrapper";
 
-export default (props) => {
+export default () => {
   return (
     <Container maxWidth="lg">
       <Typography variant="h1" component="h1" gutterBottom>Accidents</Typography>

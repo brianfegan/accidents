@@ -43,6 +43,7 @@ export default function() {
     chart_type: CONST.LINE,
     features,
     filters,
+    filtered_features: features,
     years
   };
 }

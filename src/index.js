@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import 'normalize.css';
 import './scss/global.scss';
 import initialState from './redux/initialState';
-import reducers from './redux/reducers';
+import reducer from './redux/reducer';
 import App from './components/App';
 
 function domReady(callback) {
@@ -16,7 +16,7 @@ function domReady(callback) {
 
 function init() {
   const store = createStore(
-    reducers,
+    reducer,
     initialState(),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
