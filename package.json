@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "watch": "webpack --watch",
-    "start": "webpack-dev-server --open",
+    "start": "webpack && webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
