@@ -22,7 +22,7 @@ class Chart extends React.Component{
         },
         y: {
           label: {
-            text: 'Incidents'
+            text: 'Accidents'
           }
         }
       }

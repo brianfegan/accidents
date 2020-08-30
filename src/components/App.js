@@ -7,7 +7,7 @@ import TabsWrapper from "./TabsWrapper";
 
 export default (props) => {
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth="lg">
       <Typography variant="h1" component="h1" gutterBottom>Accidents</Typography>
       <TabsWrapper data={props.data} />
     </Container>

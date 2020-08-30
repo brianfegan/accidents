@@ -15,7 +15,7 @@ export default (props) => {
     setValue(newValue);
   };
 
-  const {bounds, features, incidents_per_year} = props.data;
+  const {bounds, features, accidents_per_year} = props.data;
 
   return (
     <>
@@ -26,10 +26,10 @@ export default (props) => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <ByYear incidents_per_year={incidents_per_year} />
+        <ByYear accidents_per_year={accidents_per_year} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ByLocation bounds={bounds} features={features} incidents_per_year={incidents_per_year} />
+        <ByLocation bounds={bounds} features={features} accidents_per_year={accidents_per_year} />
       </TabPanel>
     </>
   );

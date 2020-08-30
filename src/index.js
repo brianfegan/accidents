@@ -15,18 +15,18 @@ function init() {
   const years = ['2010', '2011', '2012', '2013', '2014'];
 
   const data = {
-    // add incident_years to each feature property
+    // add accident_years to each feature property
     features: annotatedData.features.map(feature => {
       const {properties} = feature;
-      feature.properties.incident_years = [];
+      feature.properties.accident_years = [];
       years.forEach(year => {
-        if (properties[year] !== null) feature.properties.incident_years.push(year);
+        if (properties[year] !== null) feature.properties.accident_years.push(year);
       });
       return feature;
     }),
 
-    // save a dataset of incidents per year
-    incidents_per_year: annotatedData.features.reduce((acc, curr) => {
+    // save a dataset of accidents per year
+    accidents_per_year: annotatedData.features.reduce((acc, curr) => {
       const {properties} = curr;
       years.forEach(year => {
         if (properties[year] !== null) {

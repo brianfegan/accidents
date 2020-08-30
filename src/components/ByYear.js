@@ -13,10 +13,10 @@ import Chart from "./Chart";
 export default function ByYear(props) {
   const [value, setValue] = React.useState('line');
 
-  const {incidents_per_year} = props;
-  const years = Object.keys(incidents_per_year);
-  const columns = ['Incidents'].concat(years.map(year => incidents_per_year[year]));
-  const pie_columns = Object.keys(incidents_per_year).map(year => [year, incidents_per_year[year]]);
+  const {accidents_per_year} = props;
+  const years = Object.keys(accidents_per_year);
+  const columns = ['Incidents'].concat(years.map(year => accidents_per_year[year]));
+  const pie_columns = Object.keys(accidents_per_year).map(year => [year, accidents_per_year[year]]);
 
   const handleChange = (event) => {
     setValue(event.target.value);

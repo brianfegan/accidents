@@ -13,9 +13,9 @@ import Leaflet from "./Leaflet";
 
 
 export default function ByLocation(props) {
-  const {bounds, features, incidents_per_year} = props;
+  const {bounds, features, accidents_per_year} = props;
   const [state, setState] = React.useState({
-    years: Object.keys(incidents_per_year).reduce((acc, year) => {
+    years: Object.keys(accidents_per_year).reduce((acc, year) => {
       acc[year] = true;
       return acc;
     }, {})
@@ -29,11 +29,11 @@ export default function ByLocation(props) {
   const {years} = state;
   const filteredYears = Object.keys(years).filter(year => years[year]);
   const filtered = features.filter(feature => {
-    const {incident_years} = feature.properties;
-    if (incident_years.length > 0) {
-      for (let i=0; i<incident_years.length; i++) {
-        const incident_year = incident_years[i];
-        if (filteredYears.indexOf(incident_year) !== -1) return true;
+    const {accident_years} = feature.properties;
+    if (accident_years.length > 0) {
+      for (let i=0; i<accident_years.length; i++) {
+        const accident_year = accident_years[i];
+        if (filteredYears.indexOf(accident_year) !== -1) return true;
       }
     }
     return false;
