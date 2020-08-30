@@ -1,5 +1,5 @@
 import React from "react";
-//import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Checkbox,
   FormLabel,
@@ -10,23 +10,23 @@ import {
   Typography
 } from '@material-ui/core';
 import Leaflet from "./Leaflet";
+import {
+  getAccidentsPerYear,
+  getBounds,
+  //getFiltersFeatures,
+  getFiltersYears
+} from "../redux/selectors";
+import { setLocationFilters } from "../redux/actions";
 
 
 export default function ByLocation(props) {
-  const {bounds, features, accidents_per_year} = props;
-  const [state, setState] = React.useState({
-    years: Object.keys(accidents_per_year).reduce((acc, year) => {
-      acc[year] = true;
-      return acc;
-    }, {})
-  });
-  const handleChange = (event) => {
-    const {years} = state;
-    years[event.target.name] = event.target.checked;
-    setState({years});
-  };
+  const years = useSelector(getFiltersYears);
+  const dispatch = useDispatch();
+  const {features} = props;
 
-  const {years} = state;
+  const handleChange = event =>
+    dispatch(setLocationFilters({[event.target.name]: event.target.checked}));
+
   const filteredYears = Object.keys(years).filter(year => years[year]);
   const filtered = features.filter(feature => {
     const {accident_years} = feature.properties;
@@ -59,7 +59,7 @@ export default function ByLocation(props) {
       </Grid>
       <Grid component="div" item xs={10}>
         <Typography component="h2"><b>{filtered.length}</b> Geographic Features With Accidents</Typography>
-        <Leaflet bounds={bounds} features={filtered} />
+        <Leaflet bounds={useSelector(getBounds)} features={filtered} />
       </Grid>
     </Grid>
   )

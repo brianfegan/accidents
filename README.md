@@ -2,9 +2,8 @@
 
 ## Steps
 * Set up web server/project dependencies
-* Set up wrapper for views/UI via material-ui
-* Do we need redux? Not really. :)
 * Massage application data; incidents, bounds, etc.
-* Set up tabs and filters
+* Set up wrapper for views/UI via material-ui, set up tabs
 * Set up leaflet implementation w/ filtered locations
 * Set up bar and line graph D3 charts
+* Port component state to redux

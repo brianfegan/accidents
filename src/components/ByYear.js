@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Radio,
   RadioGroup,
@@ -9,18 +10,23 @@ import {
   Typography
 } from '@material-ui/core';
 import Chart from "./Chart";
+import {
+  getAccidentsPerYear,
+  getChartType,
+  getYears
+} from "../redux/selectors";
+import { setChartType } from "../redux/actions";
 
-export default function ByYear(props) {
-  const [value, setValue] = React.useState('line');
+export default function ByYear() {
+  const accidents_per_year = useSelector(getAccidentsPerYear);
+  const chart_type = useSelector(getChartType);
+  const years = useSelector(getYears);
+  const dispatch = useDispatch();
 
-  const {accidents_per_year} = props;
-  const years = Object.keys(accidents_per_year);
   const columns = ['Incidents'].concat(years.map(year => accidents_per_year[year]));
   const pie_columns = Object.keys(accidents_per_year).map(year => [year, accidents_per_year[year]]);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  const handleChange = event => dispatch(setChartType(event.target.value));
 
   return (
     <Grid
@@ -33,7 +39,7 @@ export default function ByYear(props) {
       <Grid component="div" item xs={2}>
         <FormControl component="fieldset">
           <FormLabel component="legend">Chart Type</FormLabel>
-          <RadioGroup aria-label="chart type" name="chart_type" value={value} onChange={handleChange}>
+          <RadioGroup aria-label="chart type" name="chart_type" value={chart_type} onChange={handleChange}>
             <FormControlLabel value="line" control={<Radio />} label="Line" />
             <FormControlLabel value="bar" control={<Radio />} label="Bar" />
             <FormControlLabel value="pie" control={<Radio />} label="Pie" />
@@ -42,7 +48,7 @@ export default function ByYear(props) {
       </Grid>
       <Grid component="div" item xs={10}>
         <Typography component="h2">Accidents by Year</Typography>
-        <Chart years={years} columns={columns} pie_columns={pie_columns} type={value} />
+        <Chart years={years} columns={columns} pie_columns={pie_columns} type={chart_type} />
       </Grid>
     </Grid>
   )

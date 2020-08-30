@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux';
+import { connect, Provider } from 'react-redux';
+// TODO: remove import
 import annotatedData from './data/annotatedData';
 import 'normalize.css';
 import './scss/global.scss';
+import initialState from './redux/initialState';
+import reducers from './redux/reducers';
 import App from './components/App';
 
 function domReady(callback) {
@@ -35,15 +40,21 @@ function init() {
       });
       return acc;
     }, {}),
-
-    // save an array of the bounds of every geojson feature
-    bounds: annotatedData.features.reduce((acc, curr) => {
-      const coords = curr.geometry.coordinates[0].map(coord => coord.slice().reverse());
-      return acc.concat(coords);
-    }, [])
   };
 
-  ReactDOM.render(<App data={data} />, document.querySelector('#app'));
+  const store = createStore(
+    reducers,
+    initialState(),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <App data={data} />
+    </Provider>,
+    document.querySelector('#app')
+  );
+  //ReactDOM.render(<App data={data} />, document.querySelector('#app'));
 }
 
 domReady(init);
