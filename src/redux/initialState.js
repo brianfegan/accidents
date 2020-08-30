@@ -32,28 +32,17 @@ export default function() {
   }, {});
 
   // compose initial filters data
-  const filters = {
-    years: Object.keys(accidents_per_year).reduce((acc, year) => {
+  const filters = Object.keys(accidents_per_year).reduce((acc, year) => {
       acc[year] = true;
       return acc;
-    }, {}),
-    features
-  };
+    }, {});
 
-  const returnObj = {
+  return {
     accidents_per_year,
     bounds,
     chart_type: CONST.LINE,
-    //features,
+    features,
     filters,
     years
   };
-  console.log(returnObj);
-  return returnObj;
-  // return {
-  //   accidents_per_year,
-  //   bounds,
-  //   features,
-  //   years
-  // };
 }

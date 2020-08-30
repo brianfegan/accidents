@@ -8,14 +8,12 @@ import TabPanel from "./TabPanel";
 import ByLocation from "./ByLocation";
 import ByYear from "./ByYear";
 
-export default (props) => {
+export default () => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const {bounds, features, accidents_per_year} = props.data;
 
   return (
     <>
@@ -26,10 +24,10 @@ export default (props) => {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <ByYear accidents_per_year={accidents_per_year} />
+        <ByYear />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ByLocation bounds={bounds} features={features} accidents_per_year={accidents_per_year} />
+        <ByLocation />
       </TabPanel>
     </>
   );

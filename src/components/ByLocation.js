@@ -11,22 +11,23 @@ import {
 } from '@material-ui/core';
 import Leaflet from "./Leaflet";
 import {
-  getAccidentsPerYear,
   getBounds,
-  //getFiltersFeatures,
-  getFiltersYears
+  getFeatures,
+  getFilters
 } from "../redux/selectors";
 import { setLocationFilters } from "../redux/actions";
 
 
-export default function ByLocation(props) {
-  const years = useSelector(getFiltersYears);
+export default function ByLocation() {
+  const years = useSelector(getFilters);
+  const features = useSelector(getFeatures);
   const dispatch = useDispatch();
-  const {features} = props;
 
   const handleChange = event =>
     dispatch(setLocationFilters({[event.target.name]: event.target.checked}));
 
+  // this could go in redux but would have to include something like immutableJS
+  // to get around equality checks and mutable structures not forcing renders
   const filteredYears = Object.keys(years).filter(year => years[year]);
   const filtered = features.filter(feature => {
     const {accident_years} = feature.properties;
