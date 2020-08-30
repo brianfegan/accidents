@@ -7,7 +7,6 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
-  Typography
 } from '@material-ui/core';
 import Chart from "./Chart";
 import {
