@@ -40,6 +40,7 @@ View site on <a href="http://localhost:8080">http://localhost:8080</a>
 * What I didn't do (things I might add/improve on with more time)
   - There's some hacks in the reducer to clone objects and not worry about mutable objects. In a "real" app, I would've added <a href="https://immutable-js.github.io/immutable-js/">ImmutableJS</a>.
   - I put all the actions/reducers/selectors in single files but would break those out by feature to scale in a "real" app.
+  - I'm importing the data as a static object rather than retrieving it via a http request. I could've set up some kind of request module (i.e. with axios/fetch) in case this data was intended to be more dynamic.
   - I really only added a couple lines of CSS/SCSS; the app relies heavily on default UI from Material, Leaflet, and C3. I could've come up with something more custom. :)
   - Could set up a real generated build rather than just use webpack-dev-server.
   - Tests for the actions, reducer, initialState bootstrap method
